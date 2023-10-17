@@ -42,16 +42,17 @@ class WellcomeScreen extends StatelessWidget {
           ),
           15.heightBox,
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomPaint(
-                size: Size(context.screenWidth * .40, 1), // Size of the line
+                size: Size(context.screenWidth * .35, 1), // Size of the line
                 painter: MyPainter(), // CustomPainter
               ),
               8.widthBox,
               "OR".text.make(),
               8.widthBox,
               CustomPaint(
-                size: Size(context.screenWidth * .40, 1), // Size of the line
+                size: Size(context.screenWidth * .35, 1), // Size of the line
                 painter: MyPainter(), // CustomPainter
               ),
             ],
