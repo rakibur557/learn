@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:learn/views/wellcome_screen/wellcome_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,6 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await GoogleSignIn().disconnect();
+          FirebaseAuth.instance.signOut();
+          Get.offAll(() => const WellcomeScreen());
+        },
+        child: const Icon(Icons.logout),
+      ),
       appBar: AppBar(
         backgroundColor: const Color(0xFF134668),
         leading: Row(
@@ -24,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.only(right: 10, left: 20),
               child: CircleAvatar(
-                child: Image.asset('assets/images/Group Study.png'),
+                child: Image.asset('assets/icons/google.png'),
               ),
             ),
             const Column(
@@ -53,14 +65,14 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             onPressed: () {},
             icon: Image.asset(
-              "assets/images/trophy.png",
+              "assets/icons/google.png",
               width: 35,
             ),
           ),
           IconButton(
             onPressed: () {},
             icon: Image.asset(
-              "assets/images/setting.png",
+              "assets/icons/google.png",
               width: 35,
             ),
           ),
@@ -106,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Subjecttive.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),
@@ -125,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Practice.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),
@@ -144,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Lessionwise.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),
@@ -163,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Special.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),
@@ -182,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Free point.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),
@@ -229,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Group Study.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),
@@ -248,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Syllabus.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),
@@ -267,7 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Classes.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),
@@ -314,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Wallet.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),
@@ -333,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Leaderboard.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),
@@ -352,7 +364,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
-                            "assets/images/Reward.png",
+                            "assets/icons/google.png",
                             width: 30,
                           ),
                         ),

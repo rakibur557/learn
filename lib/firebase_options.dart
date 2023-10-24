@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCX51xIJGDTfHFTcPwhHAInm_OGDjuNAlw',
-    appId: '1:379758741200:web:c1fa047b95e70897b940d5',
-    messagingSenderId: '379758741200',
-    projectId: 'edgefly-academy',
-    authDomain: 'edgefly-academy.firebaseapp.com',
-    storageBucket: 'edgefly-academy.appspot.com',
-    measurementId: 'G-236KNWK2WE',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCb-Q4ezgYc0HAVbKe763ddgxhI2Lp8lI4',
     appId: '1:379758741200:android:2cac9b4173f792dbb940d5',
@@ -70,6 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '379758741200',
     projectId: 'edgefly-academy',
     storageBucket: 'edgefly-academy.appspot.com',
+    androidClientId: '379758741200-3s4j0kkti42j1igetduk1aiikeuql6ap.apps.googleusercontent.com',
+    iosClientId: '379758741200-p8raolrb3ntcn0mpj1dr9l3dv02f4vrk.apps.googleusercontent.com',
     iosBundleId: 'com.edgefly.l.earn.learn',
   );
 }

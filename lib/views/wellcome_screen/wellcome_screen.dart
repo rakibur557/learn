@@ -1,13 +1,67 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:learn/apis/api.dart';
+import 'package:learn/common%20widzet/dialogs.dart';
+import 'package:learn/views/home_screen/home_screen.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../Registration_page/Registration_page.dart';
 import '../signin_page/signin_screen.dart';
 import 'component/line.dart';
 
-class WellcomeScreen extends StatelessWidget {
+class WellcomeScreen extends StatefulWidget {
   const WellcomeScreen({super.key});
+
+  @override
+  State<WellcomeScreen> createState() => _WellcomeScreenState();
+}
+
+class _WellcomeScreenState extends State<WellcomeScreen> {
+  handleGoogleButtunClick() {
+    Dialogs.showProgress(context);
+    signInWithGoogle().then((user) async {
+      navigator!.pop(context);
+      if (user != null) {
+        //already have data
+        if ((await Apis.userExists())) {
+          Get.offAll(() => const HomeScreen());
+        } else {
+          //user log in for first time
+          await Apis.createUser().then((value) {
+            Get.offAll(() => const HomeScreen());
+          });
+        }
+      }
+    });
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    try {
+      await InternetAddress.lookup('google.com');
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      Dialogs.showSnackbar(context, "No internet connection !");
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,33 +112,33 @@ class WellcomeScreen extends StatelessWidget {
             ],
           ).box.padding(const EdgeInsets.symmetric(horizontal: 20)).make(),
           10.heightBox,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  "assets/icons/facebook.png",
-                  width: 40,
+          SizedBox(
+            width: context.screenWidth * .9,
+            height: context.screenHeight * .06,
+            child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 223, 255, 187),
+                  shape: const StadiumBorder(),
+                  elevation: 1),
+              onPressed: () {
+                handleGoogleButtunClick();
+              },
+              //google icon
+              icon: Image.asset('assets/icons/google.png',
+                  height: context.screenHeight * .03),
+              //login with google label
+              label: RichText(
+                text: const TextSpan(
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                  children: [
+                    TextSpan(text: 'Login with '),
+                    TextSpan(
+                        text: 'Google',
+                        style: TextStyle(fontWeight: FontWeight.w500)),
+                  ],
                 ),
               ),
-              20.widthBox,
-              IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  "assets/icons/google.png",
-                  width: 40,
-                ),
-              ),
-              20.widthBox,
-              IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  "assets/icons/phone.png",
-                  width: 40,
-                ),
-              ),
-            ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
