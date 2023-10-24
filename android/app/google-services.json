@@ -12,7 +12,20 @@
           "package_name": "com.edgefly.l.earn.learn"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "379758741200-3s4j0kkti42j1igetduk1aiikeuql6ap.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edgefly.l.earn.learn",
+            "certificate_hash": "d78c0b4ecf7181f6612fe7c7ad9a7f7a2920b242"
+          }
+        },
+        {
+          "client_id": "379758741200-jp6djsqjh48gediebl1mcr5dtqdqsg7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCb-Q4ezgYc0HAVbKe763ddgxhI2Lp8lI4"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379758741200-jp6djsqjh48gediebl1mcr5dtqdqsg7d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "379758741200-p8raolrb3ntcn0mpj1dr9l3dv02f4vrk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.edgefly.l.earn.learn"
+              }
+            }
+          ]
         }
       }
     }
