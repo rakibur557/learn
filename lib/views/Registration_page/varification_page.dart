@@ -7,8 +7,6 @@ import 'package:learn/apis/api.dart';
 import 'package:learn/common%20widzet/dialogs.dart';
 import 'package:learn/views/Registration_page/Registration_page.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-import '../../model/coustom_text.dart';
 import '../home_screen/home_screen.dart';
 import 'package:pinput/pinput.dart';
 

@@ -1,16 +1,49 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:learn/views/wellcome_screen/wellcome_screen.dart';
+import 'package:velocity_x/velocity_x.dart';
+import 'package:learn/views/home_screen/widget/home_wiget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final List _image = [
+    'assets/images/Subjecttive.png',
+    'assets/images/Practice.png',
+    'assets/images/Lessionwise.png',
+    'assets/images/Special.png',
+    'assets/images/Free point.png',
+  ];
+  final List _image2 = [
+    'assets/images/Group Study.png',
+    'assets/images/Syllabus.png',
+    'assets/images/Classes.png',
+  ];
+  final List _image3 = [
+    'assets/images/Wallet.png',
+    'assets/images/Leaderboard.png',
+    'assets/images/Reward.png',
+  ];
+  final List _text = [
+    'Subjecttive',
+    'Practice',
+    'Lessionwise',
+    'Special',
+    'Free point',
+  ];
+  final List _text2 = [
+    'Group Study',
+    'Syllabus',
+    'Classes',
+  ];
+  final List _text3 = [
+    'Wallet',
+    'Leaderboard',
+    'Reward',
+  ];
   int _selectedTab = 0;
   _changeTab(int index) {
     setState(() {
@@ -21,14 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await GoogleSignIn().disconnect();
-          FirebaseAuth.instance.signOut();
-          Get.offAll(() => const WellcomeScreen());
-        },
-        child: const Icon(Icons.logout),
-      ),
       appBar: AppBar(
         backgroundColor: const Color(0xFF134668),
         leading: Row(
@@ -36,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.only(right: 10, left: 20),
               child: CircleAvatar(
-                child: Image.asset('assets/icons/google.png'),
+                child: Image.asset('assets/images/Group Study.png'),
               ),
             ),
             const Column(
@@ -60,20 +85,27 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        leadingWidth: double.infinity,
+        leadingWidth: context.screenWidth * 0.8,
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Image.asset(
-              "assets/icons/google.png",
-              width: 35,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Image.asset(
-              "assets/icons/google.png",
-              width: 35,
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Image.asset(
+                    "assets/images/trophy.png",
+                    width: context.screenWidth * 0.09,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Image.asset(
+                    "assets/images/setting.png",
+                    width: context.screenWidth * 0.09,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -96,114 +128,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 0.1,
-              child: Container(color: Colors.black),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            const Divider(thickness: 0.5),
             Expanded(
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Subjective")
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Practice")
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Lessionwise"),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Special")
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Free point")
-                    ],
-                  ),
-                ],
-              ),
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _image.length,
+                  itemBuilder: (context, index) {
+                    return HomeWiget(
+                      image: _image[index],
+                      text: _text[index],
+                    );
+                  }),
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -219,76 +154,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 0.1,
-              child: Container(color: Colors.black),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            const Divider(thickness: 0.5),
             Expanded(
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Group Study"),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Syllabus"),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Classes"),
-                    ],
-                  ),
-                ],
-              ),
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _image2.length,
+                  itemBuilder: (context, index) {
+                    return HomeWiget(
+                      image: _image2[index],
+                      text: _text2[index],
+                    );
+                  }),
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -304,76 +180,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 0.1,
-              child: Container(color: Colors.black),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            const Divider(thickness: 0.5),
             Expanded(
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(6.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Wallet"),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Leaderboard"),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google.png",
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                      const Text("Reward"),
-                    ],
-                  ),
-                ],
-              ),
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _image3.length,
+                  itemBuilder: (context, index) {
+                    return HomeWiget(
+                      image: _image3[index],
+                      text: _text3[index],
+                    );
+                  }),
             ),
           ],
         ),
@@ -381,8 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
         onTap: (index) => _changeTab(index),
-        iconSize: 30,
-        elevation: 10,
+        iconSize: context.screenWidth * .08,
         backgroundColor: Colors.transparent,
         selectedItemColor: Colors.grey.shade600,
         items: [
