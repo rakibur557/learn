@@ -59,6 +59,8 @@ class _WellcomeScreenState extends State<WellcomeScreen> {
     } catch (e) {
       // ignore: use_build_context_synchronously
       Dialogs.showSnackbar(context, "No internet connection !");
+      // ignore: avoid_print
+      print('error:$e');
       return null;
     }
   }

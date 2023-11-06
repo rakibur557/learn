@@ -9,6 +9,10 @@ class UserDetails {
     required this.lastActive,
     required this.email,
     required this.pushToken,
+    required this.phone,
+    required this.category,
+    required this.institution,
+    required this.password,
   });
   late String image;
   late String about;
@@ -19,6 +23,10 @@ class UserDetails {
   late String lastActive;
   late String email;
   late String pushToken;
+  late String phone;
+  late String category;
+  late String institution;
+  late String password;
 
   UserDetails.fromJson(Map<String, dynamic> json) {
     image = json['image'] ?? '';
@@ -30,6 +38,10 @@ class UserDetails {
     lastActive = json['last_active'] ?? '';
     email = json['email'] ?? '';
     pushToken = json['push_token'] ?? '';
+    phone = json['phone'] ?? '';
+    category = json['category'] ?? '';
+    institution = json['institution'] ?? '';
+    password = json['password'] ?? '';
   }
 
   Map<String, dynamic> toJson() {
@@ -43,6 +55,10 @@ class UserDetails {
     data['last_active'] = lastActive;
     data['email'] = email;
     data['push_token'] = pushToken;
+    data['phone'] = phone;
+    data['category'] = category;
+    data['institution'] = institution;
+    data['password'] = password;
     return data;
   }
 }

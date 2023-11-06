@@ -1,14 +1,53 @@
+// ignore_for_file: unused_local_variable, use_build_context_synchronously
+
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learn/apis/api.dart';
+import 'package:learn/common%20widzet/dialogs.dart';
+import 'package:learn/views/Registration_page/Registration_page.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../model/coustom_text.dart';
 import '../home_screen/home_screen.dart';
+import 'package:pinput/pinput.dart';
 
-class VerificationPage extends StatelessWidget {
-  const VerificationPage({super.key});
+class VerificationPage extends StatefulWidget {
+  final User user;
+  const VerificationPage({super.key, required this.user});
 
   @override
+  State<VerificationPage> createState() => _VerificationPageState();
+}
+
+class _VerificationPageState extends State<VerificationPage> {
+  final firebase_auth.FirebaseAuth auth = firebase_auth.FirebaseAuth.instance;
+  var code = "";
+  @override
   Widget build(BuildContext context) {
+    final defaultPinTheme = PinTheme(
+      width: 56,
+      height: 56,
+      textStyle: const TextStyle(
+          fontSize: 20,
+          color: Color.fromRGBO(30, 60, 87, 1),
+          fontWeight: FontWeight.w600),
+      decoration: BoxDecoration(
+        border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
+        borderRadius: BorderRadius.circular(20),
+      ),
+    );
+
+    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+      border: Border.all(color: const Color.fromRGBO(114, 178, 238, 1)),
+      borderRadius: BorderRadius.circular(8),
+    );
+
+    final submittedPinTheme = defaultPinTheme.copyWith(
+      decoration: defaultPinTheme.decoration!.copyWith(
+        color: const Color.fromRGBO(234, 239, 243, 1),
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -21,15 +60,14 @@ class VerificationPage extends StatelessWidget {
         child: Column(
           children: [
             10.heightBox,
-            "Code has send to +88015.........".text.size(17).make(),
+            "Code has send to ${widget.user.phone}".text.size(17).make(),
             30.heightBox,
-            TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                hintText: 'Enter 6-digit code',
-                border: OutlineInputBorder(
-                    gapPadding: 2, borderRadius: BorderRadius.circular(10)),
-              ),
+            Pinput(
+              length: 6,
+              showCursor: true,
+              onChanged: (value) {
+                code = value;
+              },
             ),
             30.heightBox,
             "Resend code in 59 s".text.size(16).color(Colors.black54).make(),
@@ -40,10 +78,33 @@ class VerificationPage extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF134668)),
-                onPressed: () {
-                  Get.offAll(() => const HomeScreen());
+                onPressed: () async {
+                  Dialogs.showProgress(context);
+                  try {
+                    firebase_auth.PhoneAuthCredential credential =
+                        firebase_auth.PhoneAuthProvider.credential(
+                            verificationId: RegistrationPage.verify,
+                            smsCode: code);
+
+                    // Sign the user in (or link) with the credential
+                    await auth.signInWithCredential(credential);
+                    await Apis.storeUserData(
+                      name: widget.user.name,
+                      password: widget.user.password,
+                      email: widget.user.email,
+                      phone: widget.user.phone,
+                      category: widget.user.category,
+                      institution: widget.user.institution,
+                    ).then((value) {
+                      VxToast.show(context, msg: "signupsucess");
+                      Get.offAll(() => const HomeScreen());
+                    });
+                    navigator!.pop(context);
+                  } catch (e) {
+                    VxToast.show(context, msg: "Wrong OTP");
+                  }
                 },
-                child: "Next".text.white.make(),
+                child: "Verify".text.white.make(),
               ),
             ),
           ],
